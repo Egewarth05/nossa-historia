@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Timeline do Nosso Amor 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Geral ===== */
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fff0f6;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* ===== Boas-vindas ===== */
+    .hero {
+      height: 200px;
+      background: linear-gradient(135deg, #ffe4e1, #ffd1dc);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero h2 {
+      font-family: 'Amatic SC', cursive;
+      font-size: 2.5rem;
+      margin: 0;
+      color: #d6336c;
+      animation: fadeInDown 1s ease forwards;
+    }
+    .hero p {
+      margin-top: 8px;
+      font-size: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.5s forwards;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* ===== Corações flutuantes ===== */
+    #hearts { position: fixed; inset: 0; pointer-events: none; z-index: -1; }
+    .heart { position: absolute; width: 12px; height: 12px; background: #ff6b81; transform: rotate(45deg); opacity: 0.7; }
+    .heart:before, .heart:after {
+      content: '';
+      position: absolute;
+      width: 12px; height: 12px;
+      background: #ff6b81;
+      border-radius: 50%;
+    }
+    .heart:before { top: -6px; }
+    .heart:after  { left: 6px; }
+
+    /* ===== Timeline ===== */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px;
+      max-height: calc(100vh - 280px);
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+    .event {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    .event:hover { transform: translateY(-4px); }
+    .event img {
+      width: 100%;
+      border-radius: 12px 12px 0 0;
+      border: 6px solid #ffe4e1;
+      box-shadow:
+        0 4px 6px rgba(0,0,0,0.1),
+        inset 0 0 0 2px rgba(214,51,108,0.2);
+      box-sizing: border-box;
+      transition: transform 0.4s ease;
+    }
+    .event:hover img { transform: scale(1.02); }
+    .info { padding: 12px; }
+    .info h2 { margin: 0 0 6px; font-size: 1.1rem; color: #d6336c; display: flex; align-items: center; gap: 6px; }
+    .info p  { margin: 0; font-size: 0.95rem; color: #555; display: flex; align-items: center; gap: 6px; }
+
+    /* ===== Modal ===== */
+    #modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center;
+      visibility: hidden; opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    #modal.open { visibility: visible; opacity: 1; }
+    .modal-content { position: relative; }
+    .modal-content img { max-width: 90vw; max-height: 80vh; border-radius: 8px; }
+    .close {
+      position: absolute; top: -16px; right: -16px;
+      background: #d6336c; color: #fff; border: none;
+      border-radius: 50%; width: 32px; height: 32px;
+      font-size: 1.2rem; cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .close:hover { transform: scale(1.2); }
+  </style>
+</head>
+<body>
+
+  <!-- Hero de boas-vindas -->
+  <section class="hero">
+    <h2>Bem-vinda, meu amor! ❤️</h2>
+    <p>Role para rever cada momento especial.</p>
+  </section>
+
+  <div id="hearts"></div>
+
+  <!-- Timeline vertical -->
+  <div class="timeline">
+    <!-- Example: basta repetir este bloco para cada foto -->
+    <div class="event" data-desc="Nossa primeira foto juntos.">
+      <img src="img/first.jpg" alt="Foto Juntos" onclick="openModal(this)">
+      <div class="info">
+        <h2>📅 29/04/2023</h2>
+        <p>📸 Foto Juntos</p>
+      </div>
+    </div>
+    <!-- ... outros eventos -->
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close" id="closeBtn">×</button>
+      <img src="" alt="Detalhe">
+    </div>
+  </div>
+
+  <script>
+    // Corações flutuantes
+    function spawnHeart() {
+      const h = document.createElement('div');
+      h.className = 'heart';
+      const s = Math.random()*10 + 8;
+      h.style.width = h.style.height = s + 'px';
+      h.style.left = Math.random()*100 + 'vw';
+      h.style.top = '100vh';
+      document.getElementById('hearts').append(h);
+      const dx = Math.random()*200 - 100, dy = -(Math.random()*100 + 150);
+      h.animate([{transform:'translate(0,0)'},{transform:`translate(${dx}px,${dy}px)`}], { duration:6000, easing:'ease-out' });
+      setTimeout(()=>h.remove(), 6000);
+    }
+    setInterval(spawnHeart, 400);
+
+    // Modal
+    const modal = document.getElementById('modal'),
+          modalImg = modal.querySelector('img'),
+          closeBtn = document.getElementById('closeBtn');
+
+    function openModal(el) {
+      modalImg.src = el.src;
+      modal.classList.add('open');
+    }
+    function closeModal() {
+      modal.classList.remove('open');
+    }
+    closeBtn.onclick = closeModal;
+  </script>
+
+</body>
+</html>
