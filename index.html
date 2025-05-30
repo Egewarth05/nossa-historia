@@ -17,46 +17,6 @@
         margin-bottom: 24px; /* espaço para a timeline */
       }
 
-    /* Timeline */
-    .timeline {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      overflow-y: auto;
-      scroll-behavior: smooth;
-    }
-    .event {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform .3s;
-    }
-    .event:hover { transform: translateY(-4px); }
-    .event img {
-      width: 100%;
-      border-radius: 12px 12px 0 0;
-      border: 6px solid #ffe4e1;
-      box-shadow:
-        0 4px 6px rgba(0,0,0,0.1),
-        inset 0 0 0 2px rgba(214,51,108,0.2);
-      transition: transform .4s;
-    }
-    .event:hover img { transform: scale(1.02); }
-    .info { padding: 12px; }
-    .info h2 {
-      margin: 0 0 6px;
-      font-size: 1.1rem;
-      color: #d6336c;
-      display: flex; align-items: center; gap: 6px;
-    }
-    .info p {
-      margin: 0;
-      font-size: 0.95rem;
-      color: #555;
-      display: flex; align-items: center; gap: 6px;
-    }
     /* === Declaração Interativa === */
     .declaration-container {
       text-align: center;
@@ -101,6 +61,47 @@
       border-radius: 50%;
       width: 28px; height: 28px;
       cursor: pointer;
+    }
+
+    /* Timeline */
+    .timeline {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+    .event {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform .3s;
+    }
+    .event:hover { transform: translateY(-4px); }
+    .event img {
+      width: 100%;
+      border-radius: 12px 12px 0 0;
+      border: 6px solid #ffe4e1;
+      box-shadow:
+        0 4px 6px rgba(0,0,0,0.1),
+        inset 0 0 0 2px rgba(214,51,108,0.2);
+      transition: transform .4s;
+    }
+    .event:hover img { transform: scale(1.02); }
+    .info { padding: 12px; }
+    .info h2 {
+      margin: 0 0 6px;
+      font-size: 1.1rem;
+      color: #d6336c;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .info p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #555;
+      display: flex; align-items: center; gap: 6px;
     }
 
     /* Modal */
@@ -210,6 +211,16 @@
     </div>
   </div>
 
+  <!-- botão de declaração vem logo após o último evento -->
+    <div class="declaration-container">
+      <button id="showDeclaration">❤️ Minha Declaração</button>
+      <div id="declaration" class="hidden">
+        <p id="declText"></p>
+        <button id="closeDeclaration" class="close-decl">×</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Corações flutuantes
     function spawnHeart() {
@@ -239,6 +250,37 @@
       modal.classList.remove('open');
     }
     closeBtn.onclick = closeModal;
+  
+  const message = `Meu amor,
+
+  Cada instante ao seu lado é magia pura.
+  Você colore meus dias com sorrisos,
+  e aquece meu coração com seu carinho.
+
+  Te amo hoje e sempre! ❤️`;
+
+  // elementos
+  const btnShow = document.getElementById('showDeclaration');
+  const declBox = document.getElementById('declaration');
+  const declText = document.getElementById('declText');
+  const btnClose = document.getElementById('closeDeclaration');
+
+  btnShow.addEventListener('click', () => {
+    declBox.classList.remove('hidden');
+    // typewriter
+    declText.textContent = '';
+    let i = 0;
+    (function type() {
+      if (i < message.length) {
+        declText.textContent += message.charAt(i++);
+        setTimeout(type, 50);
+      }
+    })();
+  });
+
+  btnClose.addEventListener('click', () => {
+    declBox.classList.add('hidden');
+  });
   </script>
 
 </body>
