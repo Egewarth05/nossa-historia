@@ -29,6 +29,23 @@
     .heart::before,.heart::after{content:'';position:absolute;background:inherit;width:100%;height:100%;border-radius:50%;}
     .heart::before{top:-50%;left:0;} .heart::after{left:50%;top:0;}
 
+    .close-decl {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #d6336c;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 1.2rem;
+      line-height: 32px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 2;
+    }
+
     /* Timeline */
     .timeline{max-width:360px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:24px;position:relative;z-index:2;}
     .event{background:#fff;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,0.1);overflow:hidden;transition:transform .3s;} 
@@ -58,7 +75,7 @@
 </head>
 <body>
   <section class="hero">
-    <h2>Nosso(a) Primeiro(a)...</h2>
+    <h2>Nossa(o) Primeira(o)...</h2>
     <p>Role para rever cada momento especial.</p>
   </section>
   <div id="hearts"></div>
