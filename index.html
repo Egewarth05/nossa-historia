@@ -163,29 +163,9 @@ Saiba que estarei contigo em todos seus melhores e piores momentos, e que nosso 
 mais um deste site, com cada vez mais e mais momentos na nossa história para relembrarmos. Com todo o amor e carinho do mundo!! Ass. Jean :)
 
 Eu te amo hoje e sempre! ❤️`;
-    const btnShow = document.getElementById('showDeclaration'), declBox = document.getElementById('declaration'), declText = document.getElementById('declText'), btnClose = document.getElementById('closeDeclaration');
-    btnShow.addEventListener('click', () => {
-      declBox.classList.remove('hidden');
-      declText.textContent = '';
-      let i = 0;
-      (function type() {
-        if (i < message.length) {
-          declText.textContent += message.charAt(i++);
-          setTimeout(type, 50);
-        } else {
-          // Após terminar, adiciona coração enorme
-          const big = document.createElement('div');
-          big.className = 'big-heart';
-          declBox.append(big);
-        }
-      })();
-    });
-    btnClose.addEventListener('click', () => {
-      declBox.classList.add('hidden');
-      // Remove coração grande se existir
-      const existing = declBox.querySelector('.big-heart');
-      if (existing) existing.remove();
-    });
+    const btnShow=document.getElementById('showDeclaration'),declBox=document.getElementById('declaration'),declText=document.getElementById('declText'),btnClose=document.getElementById('closeDeclaration');
+    btnShow.addEventListener('click',()=>{declBox.classList.remove('hidden');declText.textContent='';let i=0;(function type(){if(i<message.length){declText.textContent+=message.charAt(i++);setTimeout(type,50);}})();});
+    btnClose.addEventListener('click',()=>declBox.classList.add('hidden'));
   </script>
 </body>
 </html>
