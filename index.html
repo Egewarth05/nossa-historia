@@ -7,30 +7,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     /* Geral */
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin:0; padding:0; }
+
+    /* Corpo e fontes */
     body {
-      margin: 0;
-      padding-top: 200px;            /* dá espaço para o hero fixo */
       font-family: 'Poppins', sans-serif;
       background: #fff0f6;
       color: #333;
-      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
-    /* Hero fixo no topo */
+    /* Hero estático no topo */
     .hero {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 200px;
       background: linear-gradient(135deg,#ffe4e1,#ffd1dc);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      padding: 40px 20px;
       text-align: center;
-      z-index: 1;
     }
 
+    /* Timeline */
     .timeline {
       max-width: 360px;
       margin: 0 auto;
@@ -38,33 +32,28 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
-      scroll-behavior: smooth; 
-      scroll-snap-type: y mandatory;
     }
 
-    /* Cada card não deve cortar a imagem */
+    /* Card */
     .event {
       background: #fff;
       border-radius: 12px;
-      scroll-snap-align: start;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      /* removi overflow:hidden */
       transition: transform .3s;
     }
+    .event:hover { transform: translateY(-4px); }
 
-    /* A própria imagem: sem cortes, sempre inteira */
+    /* Imagem: cabe inteira */
     .event img {
       width: 100%;
       height: auto;
       object-fit: contain;
-      object-position: top center;    /* garante toda a área visível */
       display: block;
       border-radius: 12px 12px 0 0;
       border: 6px solid #ffe4e1;
       box-shadow:
         0 4px 6px rgba(0,0,0,0.1),
         inset 0 0 0 2px rgba(214,51,108,0.2);
-      transition: transform .4s;
     }
 
     /* === Declaração Interativa === */
