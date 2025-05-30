@@ -62,48 +62,6 @@
       width: 28px; height: 28px;
       cursor: pointer;
     }
-
-    /* Timeline */
-    .timeline {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      overflow-y: auto;
-      scroll-behavior: smooth;
-    }
-    .event {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform .3s;
-    }
-    .event:hover { transform: translateY(-4px); }
-    .event img {
-      width: 100%;
-      border-radius: 12px 12px 0 0;
-      border: 6px solid #ffe4e1;
-      box-shadow:
-        0 4px 6px rgba(0,0,0,0.1),
-        inset 0 0 0 2px rgba(214,51,108,0.2);
-      transition: transform .4s;
-    }
-    .event:hover img { transform: scale(1.02); }
-    .info { padding: 12px; }
-    .info h2 {
-      margin: 0 0 6px;
-      font-size: 1.1rem;
-      color: #d6336c;
-      display: flex; align-items: center; gap: 6px;
-    }
-    .info p {
-      margin: 0;
-      font-size: 0.95rem;
-      color: #555;
-      display: flex; align-items: center; gap: 6px;
-    }
-
     /* Modal */
     #modal {
       position: fixed; inset: 0;
@@ -202,22 +160,21 @@
       <div class="info"><h2>📅 28/09/2024</h2><p>🎧 Lucca Juntos</p></div>
     </div>
   </div>
-
-  <!-- Modal -->
-  <div id="modal" onclick="closeModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="close" id="closeBtn">×</button>
-      <img src="" alt="Detalhe">
-    </div>
-  </div>
-
-  <!-- botão de declaração vem logo após o último evento -->
+   <!-- Botão de declaração -->
     <div class="declaration-container">
       <button id="showDeclaration">❤️ Minha Declaração</button>
       <div id="declaration" class="hidden">
         <p id="declText"></p>
         <button id="closeDeclaration" class="close-decl">×</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close" id="closeBtn">×</button>
+      <img src="" alt="Detalhe">
     </div>
   </div>
 
