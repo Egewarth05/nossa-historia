@@ -32,14 +32,17 @@
     }
 
     .timeline {
-      max-width: 360px;          /* ou 90% / 400px, o que achar melhor */
-      margin: 0 auto;            /* centraliza horizontalmente */
+      max-width: 360px;      /* largura máxima do “canal” de cards */
+      margin: 0 auto;        /* centraliza na página */
       padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 24px;
       overflow-y: auto;
-      scroll-behavior: smooth;
+    }
+
+    .event {
+      width: 100%;           /* cada card ocupa os 360px do pai */
     }
 
     /* === Declaração Interativa === */
