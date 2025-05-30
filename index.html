@@ -4,197 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Timeline do Nosso Amor 💕</title>
-  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Geral */
-    * { box-sizing: border-box; margin:0; padding:0; }
-
-    /* Corpo e fontes */
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #fff0f6;
-      color: #333;
-      scroll-behavior: smooth;
-    }
-
-    /* Hero estático no topo */
-    .hero {
-      background: linear-gradient(135deg,#ffe4e1,#ffd1dc);
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    /* Timeline */
-    .timeline {
-      max-width: 360px;
-      margin: 0 auto;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      /* <<< sem overflow nem altura fixa >>> */
-    }
-
-    /* Card */
-    .event {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform .3s;
-    }
-    .event:hover { transform: translateY(-4px); }
-
-    /* Imagem: cabe inteira */
-    .event img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      display: block;
-    }
-
-    /* === Declaração Interativa === */
-    .declaration-container {
-      text-align: center;
-      margin: 32px 0;
-    }
-    .declaration-container button {
-      background: #d6336c;
-      color: #fff;
-      border: none;
-      padding: 12px 24px;
-      font-size: 1rem;
-      border-radius: 24px;
-      cursor: pointer;
-      transition: background .3s;
-    }
-    .declaration-container button:hover {
-      background: #ad2958;
-    }
-    #declaration {
-      background: rgba(255,255,255,0.9);
-      border: 2px solid #d6336c;
-      border-radius: 12px;
-      padding: 20px;
-      max-width: 90%;
-      margin: 20px auto;
-      position: relative;
-    }
-    #declaration.hidden { display: none; }
-    #declText {
-      font-family: 'Amatic SC', cursive;
-      font-size: 1.4rem;
-      color: #d6336c;
-      white-space: pre-wrap;
-      min-height: 4em;
-    }
-    .close-decl {
-      position: absolute;
-      top: 8px; right: 8px;
-      background: #d6336c;
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 28px; height: 28px;
-      cursor: pointer;
-    }
-    /* Modal */
-    #modal {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.7);
-      display: flex; align-items: center; justify-content: center;
-      visibility: hidden; opacity: 0;
-      transition: opacity .3s;
-      z-index: 2;
-    }
-    #modal.open { visibility: visible; opacity: 1; }
-    .modal-content { position: relative; }
-    .modal-content img {
-      max-width: 90vw; max-height: 80vh;
-      border-radius: 8px;
-    }
-    .close {
-      position: absolute; top: -16px; right: -16px;
-      background: #d6336c; color: #fff; border: none;
-      border-radius: 50%; width: 32px; height: 32px;
-      font-size: 1.2rem; cursor: pointer;
-      transition: transform .2s;
-    }
-    .close:hover { transform: scale(1.2); }
+    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+    body { font-family:'Poppins',sans-serif; background:#fff0f6; color:#333; scroll-behavior:smooth; }
+    .hero { background:linear-gradient(135deg,#ffe4e1,#ffd1dc); padding:40px 20px; text-align:center; }
+    .hero h2{font-size:2rem;margin-bottom:8px;} .hero p{font-size:1rem;}
+    #hearts {position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:1;}
+    .heart{position:absolute;background:rgba(214,51,108,0.8);transform:rotate(45deg);} .heart::before,.heart::after{content:'';position:absolute;background:inherit;width:100%;height:100%;border-radius:50%;}
+    .heart::before{top:-50%;left:0;} .heart::after{left:50%;top:0;}
+    .timeline{max-width:360px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:24px;position:relative;z-index:2;}
+    .event{background:#fff;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,0.1);overflow:hidden;transition:transform .3s;} .event:hover{transform:translateY(-4px);} .event img{width:100%;display:block;cursor:pointer;}
+    .event .info{padding:12px;text-align:center;} .event .info h2{font-size:1.1rem;margin-bottom:4px;} .event .info p{font-size:0.9rem;}
+    .declaration-container{text-align:center;margin:32px 0;} .declaration-container button{background:#d6336c;color:#fff;border:none;padding:12px 24px;font-size:1rem;border-radius:24px;cursor:pointer;transition:background .3s;} .declaration-container button:hover{background:#ad2958;}
+    #declaration{background:rgba(255,255,255,0.9);border:2px solid #d6336c;border-radius:12px;padding:20px;max-width:90%;margin:20px auto;position:relative;} #declaration.hidden{display:none;}
+    #declText{font-family:'Amatic SC',cursive;font-size:1.4rem;color:#d6336c;white-space:pre-wrap;min-height:4em;} .close-decl{position:absolute;top:8px;right:8px;background:#d6336c;color:#fff;border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;}
+    #modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity .3s;z-index:3;} #modal.open{visibility:visible;opacity:1;}
+    .modal-content{position:relative;} .modal-content img{max-width:90vw;max-height:80vh;border-radius:8px;} .modal-content .close{position:absolute;top:-16px;right:-16px;background:#d6336c;color:#fff;border:none;border-radius:50%;width:32px;height:32px;font-size:1.2rem;cursor:pointer;transition:transform .2s;} .modal-content .close:hover{transform:scale(1.2);}
   </style>
 </head>
 <body>
-
-  <!-- Hero de boas-vindas -->
   <section class="hero">
     <h2>Bem-vinda, meu amor! ❤️</h2>
     <p>Role para rever cada momento especial.</p>
   </section>
-
   <div id="hearts"></div>
-
-  <!-- Timeline vertical -->
   <div class="timeline">
     <div class="event" data-desc="Nossa primeira foto juntos.">
       <img src="img/first.jpg" alt="Foto Juntos" onclick="openModal(this)">
       <div class="info"><h2>📅 29/04/2023</h2><p>📸 Foto Juntos</p></div>
     </div>
-    <div class="event" data-desc="Glow-up incrível!">
-      <img src="img/glow.jpg" alt="Glow-Up" onclick="openModal(this)">
-      <div class="info"><h2>📅 10/06/2023</h2><p>💄 Glow-Up</p></div>
-    </div>
-    <div class="event" data-desc="Viagem romântica de carro.">
-      <img src="img/viagem.jpg" alt="Viagem juntos" onclick="openModal(this)">
-      <div class="info"><h2>📅 12/06/2023</h2><p>🚗🛣️ Viagem juntos</p></div>
-    </div>
-    <div class="event" data-desc="Show da orquestra juntos.">
-      <img src="img/orquestra.jpg" alt="Show da Orquestra" onclick="openModal(this)">
-      <div class="info"><h2>📅 28/06/2023</h2><p>🎼 Show da Orquestra</p></div>
-    </div>
-    <div class="event" data-desc="São João juntos.">
-      <img src="img/festa.jpg" alt="São João" onclick="openModal(this)">
-      <div class="info"><h2>📅 07/07/2023</h2><p>🎉 São João</p></div>
-    </div>
-    <div class="event" data-desc="Acampamento.">
-      <img src="img/acamp.jpeg" alt="Acampamento" onclick="openModal(this)">
-      <div class="info"><h2>📅 21/07/2023</h2><p>⛺️ Acampamento</p></div>
-    </div>
-    <div class="event" data-desc="Oktoberfest.">
-      <img src="img/oktober.jpg" alt="Oktoberfest" onclick="openModal(this)">
-      <div class="info"><h2>📅 14/10/2023</h2><p>🍻 Oktoberfest</p></div>
-    </div>
-    <div class="event" data-desc="Cuidados de Skincare.">
-      <img src="img/skincare.jpg" alt="Skincare" onclick="openModal(this)">
-      <div class="info"><h2>📅 16/10/2023</h2><p>💅 Skincare</p></div>
-    </div>
-    <div class="event" data-desc="Natal em família.">
-      <img src="img/natal.jpg" alt="Natal" onclick="openModal(this)">
-      <div class="info"><h2>📅 25/12/2023</h2><p>❄️ Natal</p></div>
-    </div>
-    <div class="event" data-desc="Réveillon a dois.">
-      <img src="img/virada.jpg" alt="Réveillon" onclick="openModal(this)">
-      <div class="info"><h2>📅 31/12/2023</h2><p>🎇 Réveillon</p></div>
-    </div>
-    <div class="event" data-desc="Viagem de avião.">
-      <img src="img/aviao.jpg" alt="Avião" onclick="openModal(this)">
-      <div class="info"><h2>📅 13/01/2024</h2><p>🛫 Viagem de Avião</p></div>
-    </div>
-    <div class="event" data-desc="Dia de praia juntos.">
-      <img src="img/praia.jpg" alt="Praia" onclick="openModal(this)">
-      <div class="info"><h2>📅 03/02/2024</h2><p>🏖️ Praia</p></div>
-    </div>
-    <div class="event" data-desc="Festa em família.">
-      <img src="img/familia.jpg" alt="Festa em Família" onclick="openModal(this)">
-      <div class="info"><h2>📅 01/06/2024</h2><p>👨‍👩‍👧‍👦 Festa em Família</p></div>
-    </div>
-    <div class="event" data-desc="Date oficial.">
-      <img src="img/date.jpg" alt="Date" onclick="openModal(this)">
-      <div class="info"><h2>📅 31/08/2024</h2><p>💑 Date “Oficial”</p></div>
-    </div>
-    <div class="event" data-desc="Lucca juntos.">
-      <img src="img/lucca.jpg" alt="Lucca" onclick="openModal(this)">
-      <div class="info"><h2>📅 28/09/2024</h2><p>🎧 Lucca Juntos</p></div>
-    </div>
-    <!-- Botão de declaração -->
+    <!-- Repita blocos .event conforme necessário -->
     <div class="declaration-container">
       <button id="showDeclaration">❤️ Minha Declaração</button>
       <div id="declaration" class="hidden">
@@ -203,81 +43,29 @@
       </div>
     </div>
   </div>
-
-  <!-- Modal -->
   <div id="modal" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="close" id="closeBtn">×</button>
       <img src="" alt="Detalhe">
     </div>
   </div>
-
   <script>
-    // Corações flutuantes
-    function spawnHeart() {
-      const h = document.createElement('div');
-      h.className = 'heart';
-      const s = Math.random()*10 + 8;
-      h.style.width = h.style.height = s + 'px';
-      h.style.left = Math.random()*100 + 'vw';
-      h.style.top = '100vh';
-      document.getElementById('hearts').append(h);
-      const dx = Math.random()*200 - 100, dy = -(Math.random()*100 + 150);
-      h.animate([{ transform:'translate(0,0)' },{ transform:`translate(${dx}px,${dy}px)` }], { duration:6000, easing:'ease-out' });
-      setTimeout(() => h.remove(), 6000);
-    }
-    setInterval(spawnHeart, 400);
+    function spawnHeart(){const h=document.createElement('div');h.className='heart';const s=Math.random()*10+8;h.style.width=h.style.height=s+'px';h.style.left=Math.random()*100+'vw';h.style.top='100vh';document.getElementById('hearts').append(h);const dx=Math.random()*200-100,dy=-(Math.random()*100+150);h.animate([{transform:'translate(0,0)'},{transform:`translate(${dx}px,${dy}px)`}],{duration:6000,easing:'ease-out'});setTimeout(()=>h.remove(),6000);}setInterval(spawnHeart,400);
+    const modal=document.getElementById('modal'),modalImg=modal.querySelector('img'),closeBtn=document.getElementById('closeBtn');function openModal(el){modalImg.src=el.src;modal.classList.add('open');}function closeModal(){modal.classList.remove('open');}closeBtn.onclick=closeModal;
+    const message=`Meu amor,
 
-    // Modal
-    const modal = document.getElementById('modal'),
-          modalImg = modal.querySelector('img'),
-          closeBtn = document.getElementById('closeBtn');
+Quis trazer todos estes 'primeiros' momentos marcantes na nossa até então breve história.
+Quem diria que há exatamente 2 anos e 2 meses atrás, uma simples mensagem no Instagram, no que era para começar como uma simples amizade (da sua parte KKK),
+poderia mudar para sempre o rumo das nossas vidas. Tudo o que já passamos vai ficar marcado para sempre nas nossas vidas, e não importa o que aconteça,
+cada sorriso, cada abraço, cada beijo, cada 'Eu te amo', cada desentendimento... Tudo isso fortalece a nossa relação, e cada vez mais vamos entendendo como
+lidar um com o outro, e principalmente, aprendendo um com o outro. Enfim, quis relembrar alguns dos nossos bons momentos. Isso é apenas uma ínfima fração
+destes bons momentos que tivemos, mas os melhores mesmos, são aqueles que não tem algum sequer registro gráfico, apenas sentimos no momento. Mas bom, como estes
+momentos não tenho como expressar para você por aqui, trouxe o que foi na medida do possível para representar isso.
+Saiba que estarei contigo em todos seus melhores e piores momentos, e que nosso amor prospere e se fortaleça cada dia mais. Espero daqui alguns anos poder fazer 
+mais um deste site, com cada vez mais e mais momentos na nossa história para relembrarmos. Com todo o amor e carinho do mundo!! Ass. Jean :)
 
-    function openModal(el) {
-      modalImg.src = el.src;
-      modal.classList.add('open');
-    }
-    function closeModal() {
-      modal.classList.remove('open');
-    }
-    closeBtn.onclick = closeModal;
-  
-  const message = `Meu amor,
-
-  Quis trazer todos estes "primeiros" momentos marcantes na nossa até então breve história.
-  Quem diria que há exatamente 2 anos e 2 meses atrás, uma simples mensagem no Instagram, no que era para começar como uma simples amizade (da sua parte KKK),
-  poderia mudar para sempre o rumo das nossas vidas. Tudo o que já passamos vai ficar marcado para sempre nas nossas vidas, e não importa o que aconteça,
-  cada sorriso, cada abraço, cada beijo, cada "Eu te amo", cada desentendimento... Tudo isso fortalece a nossa relação, e cada vez mais vamos entendendo como
-  lidar um com o outro, e principlamente, aprendendo um com o outro. Enfim, quis relembrar alguns dos nossos bons momentos. Isso é apenas uma ínfima fração
-  destes bons momentos que tivemos, mas os melhores mesmos, são aqueles que não tem algum sequer registro gráfico, apenas sentimos no momento. Mas bom, como estes
-  momentos não tenho como expressar para você por aqui, trouxe o que foi na medida do possível para representar isso. 
-  Saiba que estarei contigo em todos seus melhores e piores momentos, e que nosso amor prospére e se fortaleça cada dia mais. Espero daqui alguns anos poder fazer 
-  mais um deste site, com cada vez mais e mais momentos na nossa história para relembrarmos. Com todo o amor e carinho do mundo!! Ass. Jean :)
-
-  Eu te amo hoje e sempre! ❤️`;
-
-  // elementos
-  const btnShow   = document.getElementById('showDeclaration');
-  const declBox   = document.getElementById('declaration');
-  const declText  = document.getElementById('declText');
-  const btnClose  = document.getElementById('closeDeclaration');
-
-  btnShow.addEventListener('click', () => {
-    declBox.classList.remove('hidden');
-    declText.textContent = '';
-    let i = 0;
-    (function type() {
-      if (i < message.length) {
-        declText.textContent += message.charAt(i++);
-        setTimeout(type, 50);
-      }
-    })();
-  });
-
-  btnClose.addEventListener('click', () => {
-    declBox.classList.add('hidden');
-  });
+Eu te amo hoje e sempre! ❤️`;
+    const btnShow=document.getElementById('showDeclaration'),declBox=document.getElementById('declaration'),declText=document.getElementById('declText'),btnClose=document.getElementById('closeDeclaration');btnShow.addEventListener('click',()=>{declBox.classList.remove('hidden');declText.textContent='';let i=0;(function type(){if(i<message.length){declText.textContent+=message.charAt(i++);setTimeout(type,50);}})();});btnClose.addEventListener('click',()=>declBox.classList.add('hidden'));
   </script>
-
 </body>
 </html>
