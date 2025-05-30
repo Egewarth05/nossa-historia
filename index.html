@@ -32,8 +32,8 @@
     }
 
     .timeline {
-      max-width: 360px;      /* largura máxima do “canal” de cards */
-      margin: 0 auto;        /* centraliza na página */
+      max-width: 360px;
+      margin: 0 auto;
       padding: 16px;
       display: flex;
       flex-direction: column;
@@ -41,8 +41,27 @@
       overflow-y: auto;
     }
 
+    /* Cada card não deve cortar a imagem */
     .event {
-      width: 100%;           /* cada card ocupa os 360px do pai */
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      /* removi overflow:hidden */
+      transition: transform .3s;
+    }
+
+    /* A própria imagem: sem cortes, sempre inteira */
+    .event img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;    /* garante toda a área visível */
+      display: block;
+      border-radius: 12px 12px 0 0;
+      border: 6px solid #ffe4e1;
+      box-shadow:
+        0 4px 6px rgba(0,0,0,0.1),
+        inset 0 0 0 2px rgba(214,51,108,0.2);
+      transition: transform .4s;
     }
 
     /* === Declaração Interativa === */
