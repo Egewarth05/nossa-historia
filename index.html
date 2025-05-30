@@ -38,12 +38,15 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
+      scroll-behavior: smooth; 
+      scroll-snap-type: y mandatory;
     }
 
     /* Cada card não deve cortar a imagem */
     .event {
       background: #fff;
       border-radius: 12px;
+      scroll-snap-align: start;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       /* removi overflow:hidden */
       transition: transform .3s;
